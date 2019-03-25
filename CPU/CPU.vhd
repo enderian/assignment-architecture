@@ -17,13 +17,13 @@ USE ieee.numeric_std.all;
 USE work.subcircuits.all;
 ENTITY CPU IS
    PORT (CTL : IN STD_LOGIC_VECTOR(2 DOWNTO 0);
+			CIN: IN STD_LOGIC;
          A,B: IN STD_LOGIC_VECTOR (15 DOWNTO 0);
-         FO: OUT STD_LOGIC_VECTOR (15 DOWNTO 0));
+         FO: OUT STD_LOGIC_VECTOR (15 DOWNTO 0);
+			COUT: OUT STD_LOGIC);
 END CPU;
 
 ARCHITECTURE Behavior of CPU IS
---COMPONENT GATE_AND PORT (A, B: IN STD_LOGIC_VECTOR (15 DOWNTO 0); O: OUT STD_LOGIC_VECTOR (15 DOWNTO 0));
---END COMPONENT;
 Signal AND_RES: std_logic_vector (15 downto 0);
 Signal OR_RES: std_logic_vector (15 downto 0);
 Signal NOT_RES: std_logic_vector (15 downto 0);
@@ -44,8 +44,12 @@ BEGIN
    Process(CTL, A, B)
    BEGIN
 		case CTL Is
-			when "000" => FO <= ADD_RES;
-			when "001" => FO <= SUB_RES;
+			when "000" => 
+				FO	<= ADD_RES;
+				COUT <= ADD_COUT;
+			when "001" => 
+				FO <= SUB_RES;
+				COUT <= SUB_COUT;
 			when "010" => FO <= AND_RES;
 			when "011" => FO <= OR_RES;
 			when "100" => FO <= GEQ_RES;
