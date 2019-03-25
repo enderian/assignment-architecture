@@ -1,19 +1,24 @@
+# Computer Architecture 
+#
+# Pagkalos Spyros p3150133
+# Gkoumas Christos p3160026
+#
+# MIPS Bubble Sort
+
 .data
-numbers: .word 15, 1, 10, 6, 2, 11, 16, 14, 13, 19, 20, 8, 17, 9, 4, 12, 3, 7, 5, 18
+sample: .word 15, 1, 10, 6, 2, 11, 16, 14, 13, 19, 20, 8, 17, 9, 4, 12, 3, 7, 5, 18
 
 .text
 .globl main
 
 main:
-la $a0, numbers # Loading test data
+la $a0, sample # Loading SAMPLE data
 li $s0, -1 # i
 
 first_loop:
 addi $s0, $s0, 1
 li $t0, 20 # Load 20 to compare to
 bge $s0, $t0 end
-
-second_loop_init:
 li $s1, -1 # j
 
 second_loop:
