@@ -29,18 +29,23 @@ Signal OR_RES: std_logic_vector (15 downto 0);
 Signal NOT_RES: std_logic_vector (15 downto 0);
 Signal GEQ_RES: std_logic_vector (15 downto 0);
 Signal ADD_RES: std_logic_vector (15 downto 0);
+Signal SUB_RES: std_logic_vector (15 downto 0);
 Signal ADD_COUT: std_logic;
 Signal ADD_V: std_logic;
+Signal SUB_V: std_logic;
+Signal SUB_COUT: std_logic;
 BEGIN 
 	INST_AND: GATE_AND PORT MAP(A => A, B => B, O => AND_RES);
 	INST_OR: GATE_OR PORT MAP(A => A, B => B, O => OR_RES);
-	INST_NOT: GATE_NOT PORT MAP(A => A, O => NOT_RES);
+	INST_NOT: GATE_PR_NOT PORT MAP(A => A, O => NOT_RES);
 	INST_GEQ: GATE_GEQ PORT MAP(A => A, O => GEQ_RES);
 	INST_ADD: FULLADDER_16 PORT MAP(A => A, B => B, CIN => '0', O16 => ADD_RES, V => ADD_V, COUT => ADD_COUT);
+	INST_SUB: SUBTRACTOR_16 PORT MAP(A => A, B => B, CIN => '0', O16 => SUB_RES, V => SUB_V, COUT => SUB_COUT);
    Process(CTL, A, B)
    BEGIN
 		case CTL Is
 			when "000" => FO <= ADD_RES;
+			when "001" => FO <= SUB_RES;
 			when "010" => FO <= AND_RES;
 			when "011" => FO <= OR_RES;
 			when "100" => FO <= GEQ_RES;
