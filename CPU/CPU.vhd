@@ -1,6 +1,9 @@
 --Christos Gkoumas, p3160026
 --Spyridon Pagkalos, p3150133
 
+--Answer to question 1C.
+--Because of the flip flops, the result of the operation with appear only when the clock changes and the enable signal is 1.
+
 LIBRARY ieee, subcircuits, ALU;
 USE ieee.std_logic_1164.all;
 USE ieee.std_logic_unsigned.all;
